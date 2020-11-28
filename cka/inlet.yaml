@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inlets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inlets
+  template:
+    metadata:
+      labels:
+        app: inlets
+    spec:
+      containers:
+      - name: inlets
+        image: inlets/inlets:2.6.3
+        imagePullPolicy: Always
+        command: ["inlets"]
+        args:
+        - "client"
+        - "--upstream=http://google.com"
+        - "--remote=13.235.196.56"
